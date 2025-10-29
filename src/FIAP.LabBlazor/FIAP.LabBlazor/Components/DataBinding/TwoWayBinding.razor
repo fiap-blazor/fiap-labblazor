@@ -1,0 +1,25 @@
+﻿@rendermode InteractiveServer
+
+<h3>Two-Way Binding</h3>
+
+<div class="mb-3">
+    <label class="form-label">Digite uma cor do Bootstrap (ex: primary, danger, success):</label>
+    <input class="form-control" @bind="cor" @bind:event="oninput" />
+</div>
+
+<div class="mb-3">
+    <label class="form-label">Digite o texto do botão:</label>
+    <input class="form-control" @bind="textoBotao" @bind:event="oninput" />
+</div>
+
+<button class="btn btn-@cor" type="button">
+    @textoBotao
+</button>
+
+<p class="mt-3">Cor atual: <span class="fw-bold">@cor</span></p>
+<p>Texto atual: <span class="fw-bold">@textoBotao</span></p>
+
+@code {
+    private string cor = "primary";
+    private string textoBotao = "Clique aqui!";
+}

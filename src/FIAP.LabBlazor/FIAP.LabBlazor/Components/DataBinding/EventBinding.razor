@@ -1,0 +1,29 @@
+﻿@rendermode InteractiveServer
+
+<h3>Event Binding</h3>
+
+<button class="btn btn-dark" @onmouseover="MostrarMensagem" @onmouseout="ResetarMensagem">Passe o mouse aqui</button>
+@* <button class="btn btn-dark" onmouseover="MostrarMensagem()" onmouseout="ResetarMensagem()">Passe o mouse aqui</button> *@
+
+<p>@mensagem</p>
+@* <p id="mensagem-js">@mensagem</p>
+<script>
+    function MostrarMensagem() {
+        document.getElementById('mensagem-js').textContent = "Mouse está sobre o botão!";
+    }
+
+    function ResetarMensagem() {
+        document.getElementById('mensagem-js').textContent = "Passe o mouse sobre o botão!";
+    }
+</script>
+*@
+
+@code {
+    private string mensagem = "Passe o mouse sobre o botão!";
+
+    private void MostrarMensagem()
+        => mensagem = "Mouse está sobre o botão!";    
+
+    private void ResetarMensagem()
+        => mensagem = "Passe o mouse sobre o botão!";    
+}

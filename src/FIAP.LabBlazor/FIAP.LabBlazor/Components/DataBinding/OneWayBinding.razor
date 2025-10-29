@@ -1,0 +1,13 @@
+﻿<h3>One-Way Binding</h3>
+
+<ul class="list-group">
+    @foreach (var produto in produtos)
+    {
+        <li class="list-group-item">@produto</li>
+    }
+</ul>
+<p>Lista atualizada em: @DateTime.Now</p>
+
+@code {
+    private List<string> produtos = new() { "Notebook", "Mouse", "Teclado" };
+}
