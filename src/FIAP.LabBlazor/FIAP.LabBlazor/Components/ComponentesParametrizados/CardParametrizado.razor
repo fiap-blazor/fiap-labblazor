@@ -1,0 +1,36 @@
+﻿<div class="card @(TemaEscuro ? "bg-dark text-white" : "")">
+    @if (!string.IsNullOrEmpty(Imagem))
+    {
+        <img src="@Imagem" class="card-img-top" alt="@Titulo">
+    }
+    <div class="card-body">
+        <h5 class="card-title">@Titulo</h5>
+        @if (!string.IsNullOrEmpty(Descricao))
+        {
+            <p class="card-text">@Descricao</p>
+        }
+        @if (OnAcaoClick.HasDelegate)
+        {
+            <button class="btn @(TemaEscuro ? "btn-light" : "btn-primary")" @onclick="OnAcaoClick">
+                Ação
+            </button>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter, EditorRequired]
+    public required string Titulo { get; set; }
+
+    [Parameter]
+    public string? Descricao { get; set; }
+
+    [Parameter]
+    public string? Imagem { get; set; }
+
+    [Parameter]
+    public bool TemaEscuro { get; set; }
+
+    [Parameter]
+    public EventCallback OnAcaoClick { get; set; }
+}

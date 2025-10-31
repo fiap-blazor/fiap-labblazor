@@ -1,0 +1,50 @@
+﻿@page "/componentes-parametrizados"
+@rendermode InteractiveServer
+
+<h3>Componentes Parametrizados</h3>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+	<div class="col">
+		<CardParametrizado Titulo="Meu Primeiro Card"
+						   Descricao="Este é um exemplo de card com parâmetros básicos."
+						   Imagem="https://guianotebook.com/wp-content/uploads/2020/01/notebook-avell-e-bom.jpg" />
+	</div>
+
+	<div class="col">
+		<CardParametrizado Titulo="Card com Tema"
+						   Descricao="Este card usa o parâmetro de tema escuro."
+						   TemaEscuro="true" />
+	</div>
+
+	<div class="col">
+		<CardParametrizado Titulo="Card com Evento"
+						   Descricao="Clique no botão para ver o evento funcionando."
+						   OnAcaoClick="@HandleCardClick" />
+
+		@if (!string.IsNullOrEmpty(_mensagemClick))
+		{
+			<div class="alert alert-info">@_mensagemClick</div>
+		}
+	</div>
+</div>
+
+
+
+@code {
+	private string? _mensagemClick = "teste";
+
+	private void HandleCardClick()
+	{
+		_mensagemClick = $"Botão clicado às {DateTime.Now:HH:mm:ss}";
+	}
+}
+
+<div class="mt-4">
+	<h4>Sobre Componentes Parametrizados</h4>
+	<p>Este exemplo demonstra:</p>
+	<ul>
+		<li>Parâmetros obrigatórios (Titulo)</li>
+		<li>Parâmetros opcionais (Imagem, TemaEscuro)</li>
+		<li>Eventos parametrizados (OnAcaoClick)</li>
+	</ul>
+</div>
