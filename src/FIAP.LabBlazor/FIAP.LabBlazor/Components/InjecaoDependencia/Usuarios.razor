@@ -1,0 +1,69 @@
+﻿@page "/injecao-dependencia"
+@inject IUsuarioServico _usuarioServico
+@attribute [StreamRendering]
+
+<PageTitle>Usuários - Injeção de Dependência</PageTitle>
+
+<h1>Usuários - Injeção de Dependência</h1>
+
+
+
+
+@if (usuarios == null)
+{
+    <div class="d-flex justify-content-center align-items-center" style="min-height: 200px;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Carregando...</span>
+        </div>
+    </div>
+}
+else if (!usuarios.Any())
+{
+    <div class="alert alert-warning">
+        <i class="bi bi-exclamation-triangle"></i> Nenhum usuário encontrado.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in usuarios)
+                {
+                    <tr>
+                        <td>@usuario.Id</td>
+                        <td>@usuario.Nome</td>
+                        <td>
+                            @if (usuario.EstaAtivo)
+                            {
+                                <span class="badge bg-success">Ativo</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">Inativo</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code {
+    private IReadOnlyList<Usuario>? usuarios;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(3000);
+        usuarios = await _usuarioServico.ObterUsuariosAsync();
+        //usuarios = new List<Usuario>();
+    }
+}

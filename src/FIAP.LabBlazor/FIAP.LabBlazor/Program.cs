@@ -1,4 +1,5 @@
 using FIAP.LabBlazor.Components;
+using FIAP.LabBlazor.Components.InjecaoDependencia;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.Services.AddScoped<IUsuarioServico, UsuarioServico>();
 
 var app = builder.Build();
 

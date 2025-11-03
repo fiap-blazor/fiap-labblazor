@@ -1,0 +1,65 @@
+﻿@page "/ciclo-vida"
+@using Microsoft.AspNetCore.Components
+
+<h3>Exemplo de Ciclo de Vida do Componente</h3>
+
+<p>Mensagem: @mensagem</p>
+<p>Parâmetro recebido: @Texto</p>
+<p>Renderizado: @renderizado</p>
+<button @onclick="AlterarEstado">Alterar Estado</button>
+
+@code {
+    // Parâmetro recebido do pai
+    [Parameter]
+    public string Texto { get; set; } = "Valor inicial";
+
+    // Estado interno
+    private string mensagem = "";
+    private bool renderizado = false;
+
+    // Executado na criação do componente
+    protected override void OnInitialized()
+    {
+        mensagem = "OnInitialized: componente criado!";
+    }
+
+    // Executado quando parâmetros são definidos ou alterados
+    protected override void OnParametersSet()
+    {
+        mensagem = $"OnParametersSet: parâmetro Texto = {Texto}";
+    }
+
+    // Executado após renderização
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            renderizado = true;
+            mensagem = "OnAfterRender: primeira renderização concluída!";
+            StateHasChanged(); // Solicita nova renderização para mostrar a mensagem
+        }
+    }
+
+    // Exemplo de alteração de estado manual
+    private void AlterarEstado()
+    {
+        mensagem = "Estado alterado pelo usuário!";
+        StateHasChanged();
+    }
+
+    // Manipulação avançada de parâmetros
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        // Tenta obter o valor do parâmetro "Texto" manualmente
+        if (parameters.TryGetValue<string>(nameof(Texto), out var textoRecebido))
+        {
+            // Aqui você pode validar, transformar ou aplicar lógica personalizada
+            if (string.IsNullOrWhiteSpace(textoRecebido))
+                Texto = "Valor padrão";
+            else
+                Texto = textoRecebido.ToUpper(); // Exemplo: transforma em maiúsculo
+        }
+
+        await base.SetParametersAsync(parameters);
+    }
+}
