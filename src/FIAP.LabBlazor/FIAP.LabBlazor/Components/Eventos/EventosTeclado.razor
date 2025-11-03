@@ -1,0 +1,81 @@
+﻿@rendermode InteractiveServer
+
+<h3>Eventos de Teclado</h3>
+
+<!-- @onkeydown -->
+<div class="mb-3">
+    <h5>@@onkeydown</h5>
+    <input type="text"
+           class="form-control"
+           placeholder="Pressione uma tecla"
+           @onkeydown="OnKeyDown" />
+    <small class="text-muted">Última tecla pressionada: @lastKeyDown (@keyDownCount vezes)</small>
+</div>
+
+<!-- @onkeyup -->
+<div class="mb-3">
+    <h5>@@onkeyup</h5>
+    <input type="text"
+           class="form-control"
+           placeholder="Solte uma tecla"
+           @onkeyup="OnKeyUp" />
+    <small class="text-muted">Última tecla solta: @lastKeyUp (@keyUpCount vezes)</small>
+</div>
+
+<!-- Exemplo combinado -->
+<div class="mb-3">
+    <h5>Exemplo Combinado (keydown + keyup)</h5>
+    <input type="text"
+           class="form-control"
+           placeholder="Digite algo..."
+           @onkeydown="OnKeyDownDetalhado"
+           @onkeyup="OnKeyUpDetalhado" />
+    <div class="mt-2">
+        <p><strong>Tecla:</strong> @teclaAtual</p>
+        <p><strong>Código:</strong> @codigoTecla</p>
+        <p><strong>Ctrl:</strong> @ctrlPressionado | <strong>Shift:</strong> @shiftPressionado | <strong>Alt:</strong> @altPressionado</p>
+        <p><strong>Estado:</strong> @estadoTecla</p>
+    </div>
+</div>
+
+@code {
+    private int keyDownCount = 0;
+    private int keyUpCount = 0;
+    private string lastKeyDown = "-";
+    private string lastKeyUp = "-";
+
+    private string teclaAtual = "-";
+    private string codigoTecla = "-";
+    private string estadoTecla = "Aguardando...";
+    private bool ctrlPressionado = false;
+    private bool shiftPressionado = false;
+    private bool altPressionado = false;
+
+
+    private void OnKeyDown(KeyboardEventArgs e)
+    {
+        keyDownCount++;
+        lastKeyDown = e.Key;
+    }
+
+    private void OnKeyUp(KeyboardEventArgs e)
+    {
+        keyUpCount++;
+        lastKeyUp = e.Key;
+    }
+
+    private void OnKeyDownDetalhado(KeyboardEventArgs e)
+    {
+        teclaAtual = e.Key;
+        codigoTecla = e.Code;
+        ctrlPressionado = e.CtrlKey;
+        shiftPressionado = e.ShiftKey;
+        altPressionado = e.AltKey;
+        estadoTecla = "Pressionada ⬇️";
+    }
+
+    private void OnKeyUpDetalhado(KeyboardEventArgs e)
+    {
+        estadoTecla = "Solta ⬆️";
+    }
+}

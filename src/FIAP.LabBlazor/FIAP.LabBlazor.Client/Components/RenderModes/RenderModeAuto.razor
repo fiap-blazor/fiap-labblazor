@@ -1,0 +1,36 @@
+﻿@page "/render-auto"
+@rendermode InteractiveAuto
+
+<PageTitle>Auto</PageTitle>
+
+<h1>Auto</h1>
+
+<div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" role="switch" id="toggleSwitch"
+           checked="@estaAtivo" @onchange="AlterarStatus" />
+    <label class="form-check-label" for="toggleSwitch">
+        @(estaAtivo ? "Ligado" : "Desligado")
+    </label>
+</div>
+
+@if (estaAtivo)
+{
+    <div class="alert alert-success mt-3">
+        O switch está <strong>Ligado</strong>!
+    </div>
+}
+else
+{
+    <div class="alert alert-danger mt-3">
+        O switch está <strong>Desligado</strong>.
+    </div>
+}
+
+@code {
+    private bool estaAtivo = false;
+
+    private void AlterarStatus(ChangeEventArgs e)
+    {
+        estaAtivo = (bool)e.Value!;
+    }
+}

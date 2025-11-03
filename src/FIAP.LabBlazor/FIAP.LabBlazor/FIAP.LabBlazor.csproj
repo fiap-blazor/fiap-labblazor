@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\RenderModes\RenderModeStatic.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FIAP.LabBlazor.Client\FIAP.LabBlazor.Client.csproj" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.21" />
   </ItemGroup>

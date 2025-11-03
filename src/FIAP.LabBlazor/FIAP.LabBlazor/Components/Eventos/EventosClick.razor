@@ -1,0 +1,112 @@
+﻿@rendermode InteractiveServer
+
+<h3>Eventos de Mouse</h3>
+
+<!-- @onclick -->
+<div class="mb-3">
+    <h5>@@onclick</h5>
+    <button class="btn btn-primary" @onclick="OnClick">
+        Clique simples
+    </button>
+    <span class="ms-2">Cliques: @clickCount</span>
+</div>
+
+<!-- @ondblclick -->
+<div class="mb-3">
+    <h5>@@ondblclick</h5>
+    <button class="btn btn-secondary" @ondblclick="OnDoubleClick">
+        Clique duplo
+    </button>
+    <span class="ms-2">Cliques duplos: @doubleClickCount</span>
+</div>
+
+<!-- @onmouseover -->
+<div class="mb-3">
+    <h5>@@onmouseover</h5>
+    <button class="btn btn-success" @onmouseover="OnMouseOver">
+        Passe o mouse aqui
+    </button>
+    <span class="ms-2">Mouse sobre: @mouseOverCount vezes</span>
+</div>
+
+<!-- @onmouseout -->
+<div class="mb-3">
+    <h5>@@onmouseout</h5>
+    <button class="btn btn-warning" @onmouseout="OnMouseOut">
+        Mouse sai daqui
+    </button>
+    <span class="ms-2">Mouse saiu: @mouseOutCount vezes</span>
+</div>
+
+<!-- @onmousemove -->
+<div class="mb-3">
+    <h5>@@onmousemove</h5>
+    <div class="border p-3" @onmousemove="OnMouseMove" style="background-color: #f0f0f0;">
+        Mova o mouse aqui - X: @mouseX, Y: @mouseY
+    </div>
+</div>
+
+<!-- @onmousedown -->
+<div class="mb-3">
+    <h5>@@onmousedown</h5>
+    <button class="btn btn-info" @onmousedown="OnMouseDown">
+        Pressione o botão do mouse
+    </button>
+    <span class="ms-2">Pressionado: @mouseDownCount vezes</span>
+</div>
+
+<!-- @onmouseup -->
+<div class="mb-3">
+    <h5>@@onmouseup</h5>
+    <button class="btn btn-danger" @onmouseup="OnMouseUp">
+        Solte o botão do mouse
+    </button>
+    <span class="ms-2">Solto: @mouseUpCount vezes</span>
+</div>
+
+@code {
+    private int clickCount = 0;
+    private int doubleClickCount = 0;
+    private int mouseOverCount = 0;
+    private int mouseOutCount = 0;
+    private int mouseDownCount = 0;
+    private int mouseUpCount = 0;
+    private double mouseX = 0;
+    private double mouseY = 0;
+
+    private void OnClick()
+    {
+        clickCount++;
+    }
+
+    private void OnDoubleClick()
+    {
+        doubleClickCount++;
+    }
+
+    private void OnMouseOver()
+    {
+        mouseOverCount++;
+    }
+
+    private void OnMouseOut()
+    {
+        mouseOutCount++;
+    }
+
+    private void OnMouseMove(MouseEventArgs e)
+    {
+        mouseX = e.ClientX;
+        mouseY = e.ClientY;
+    }
+
+    private void OnMouseDown()
+    {
+        mouseDownCount++;
+    }
+
+    private void OnMouseUp()
+    {
+        mouseUpCount++;
+    }
+}

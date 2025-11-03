@@ -3,22 +3,24 @@
 
 <h3>Componentes Parametrizados</h3>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-4 g-4">
 	<div class="col">
 		<CardParametrizado Titulo="Meu Primeiro Card"
 						   Descricao="Este é um exemplo de card com parâmetros básicos."
-						   Imagem="https://guianotebook.com/wp-content/uploads/2020/01/notebook-avell-e-bom.jpg" />
+						   Imagem="https://s2-techtudo.glbimg.com/6uq49JScWPoGDwKdSu3Q7effSwg=/0x53:800x551/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_08fbf48bc0524877943fe86e43087e7a/internal_photos/bs/2017/X/2/BZGnvoSfS6CEWxWiYvJQ/avell-1.jpg" />
 	</div>
 
 	<div class="col">
 		<CardParametrizado Titulo="Card com Tema"
 						   Descricao="Este card usa o parâmetro de tema escuro."
-						   TemaEscuro="true" />
+						   TemaEscuro="true"
+						   Imagem="https://m.media-amazon.com/images/I/410vbHsaI+L._AC_UF894,1000_QL80_.jpg" />
 	</div>
 
 	<div class="col">
 		<CardParametrizado Titulo="Card com Evento"
 						   Descricao="Clique no botão para ver o evento funcionando."
+						   Imagem="https://i.zst.com.br/thumbs/12/10/14/732301053.jpg"
 						   OnAcaoClick="@HandleCardClick" />
 
 		@if (!string.IsNullOrEmpty(_mensagemClick))
@@ -28,23 +30,11 @@
 	</div>
 </div>
 
-
-
 @code {
-	private string? _mensagemClick = "teste";
+	private string? _mensagemClick = "";
 
 	private void HandleCardClick()
 	{
 		_mensagemClick = $"Botão clicado às {DateTime.Now:HH:mm:ss}";
 	}
 }
-
-<div class="mt-4">
-	<h4>Sobre Componentes Parametrizados</h4>
-	<p>Este exemplo demonstra:</p>
-	<ul>
-		<li>Parâmetros obrigatórios (Titulo)</li>
-		<li>Parâmetros opcionais (Imagem, TemaEscuro)</li>
-		<li>Eventos parametrizados (OnAcaoClick)</li>
-	</ul>
-</div>

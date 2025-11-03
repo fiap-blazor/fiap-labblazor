@@ -1,0 +1,27 @@
+﻿@typeparam T
+
+<ul class="list-group">
+    @if (Items is not null && Items.Any())
+    {
+        @foreach (var item in Items)
+        {
+            <li class="list-group-item">
+                @ItemTemplate(item)
+            </li>
+        }
+    }
+    else
+    {
+        <li class="list-group-item text-muted text-center">
+            Nenhum item disponível.
+        </li>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public IEnumerable<T>? Items { get; set; }
+
+    [Parameter]
+    public RenderFragment<T> ItemTemplate { get; set; } = default!;
+}

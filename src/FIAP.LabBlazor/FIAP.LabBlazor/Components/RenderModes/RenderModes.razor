@@ -1,0 +1,49 @@
+﻿@page "/render-modes"
+
+<PageTitle>Render Modes</PageTitle>
+
+<h1>Render Modes</h1>
+
+<div class="row g-3">
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Static SSR</h5>
+                <p class="card-text">Renderizado no servidor, sem interatividade.</p>
+                <a href="/render-static" class="btn btn-primary">Ver Exemplo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Interactive Server</h5>
+                <p class="card-text">Interatividade via SignalR (WebSocket).</p>
+                <a href="/render-server" class="btn btn-primary">Ver Exemplo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Interactive WebAssembly</h5>
+                <p class="card-text">Executa no navegador (client-side).</p>
+                <a href="/render-wasm" class="btn btn-primary">Ver Exemplo</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">Interactive Auto</h5>
+                <p class="card-text">Server primeiro, depois WebAssembly.</p>
+                <a href="/render-auto" class="btn btn-primary">Ver Exemplo</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

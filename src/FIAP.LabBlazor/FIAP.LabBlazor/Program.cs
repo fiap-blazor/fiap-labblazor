@@ -1,4 +1,3 @@
-using FIAP.LabBlazor.Client.Pages;
 using FIAP.LabBlazor.Components;
 
 var builder = WebApplication.CreateBuilder(args);

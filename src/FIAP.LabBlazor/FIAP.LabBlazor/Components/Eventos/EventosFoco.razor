@@ -1,0 +1,59 @@
+﻿@rendermode InteractiveServer
+
+<h3>Eventos de Foco</h3>
+
+<!-- @onfocus -->
+<div class="mb-3">
+    <h5>@@onfocus</h5>
+    <input type="text"
+           class="form-control"
+           placeholder="Clique aqui"
+           @onfocus="OnFocus" />
+    <span class="ms-2">Focado: @focusCount vezes</span>
+</div>
+
+<!-- @onblur -->
+<div class="mb-3">
+    <h5>@@onblur</h5>
+    <input type="text"
+           class="form-control"
+           placeholder="Clique aqui e depois fora"
+           @onblur="OnBlur" />
+    <span class="ms-2">Desfocado: @blurCount vezes</span>
+</div>
+
+<!-- Exemplo combinado -->
+<div class="mb-3">
+    <h5>Combinado (focus + blur)</h5>
+    <input type="text"
+           class="form-control"
+           @onfocus="OnFocusCombinado"
+           @onblur="OnBlurCombinado" />
+    <span class="ms-2">Estado: @estado</span>
+</div>
+
+@code {
+    private int focusCount = 0;
+    private int blurCount = 0;
+    private string estado = "Aguardando...";
+
+    private void OnFocus()
+    {
+        focusCount++;
+    }
+
+    private void OnBlur()
+    {
+        blurCount++;
+    }
+
+    private void OnFocusCombinado()
+    {
+        estado = "Focado ✅";
+    }
+
+    private void OnBlurCombinado()
+    {
+        estado = "Desfocado ❌";
+    }
+}

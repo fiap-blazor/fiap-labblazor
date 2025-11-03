@@ -1,0 +1,61 @@
+﻿@page "/componentes-genericos"
+@rendermode InteractiveServer
+
+<h3>Componentes Genéricos</h3>
+
+<ListaGenerica Items="produtos">
+    <ItemTemplate Context="p">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-box-seam me-2 text-secondary"></i>
+            <strong>@p.Nome</strong>
+            <span class="badge bg-info ms-auto">R$ @p.Preco</span>
+        </div>
+    </ItemTemplate>
+</ListaGenerica>
+
+<br />
+
+<ListaGenerica Items="tarefas">
+    <ItemTemplate Context="t">
+        <div class="d-flex align-items-center">
+            <input type="checkbox" class="form-check-input me-2" checked="@t.Concluida" @onchange="() => AlternarTarefa(t)" />
+            <span class="me-2">@t.Descricao</span>
+            <span class="badge @(t.Concluida ? "bg-success" : "bg-warning") ms-auto">
+                @(t.Concluida ? "Concluída" : "Pendente")
+            </span>
+        </div>
+    </ItemTemplate>
+</ListaGenerica>
+
+@code {
+    private List<Produto> produtos = new()
+    {
+        new Produto { Nome = "Notebook", Preco = 3500M },
+        new Produto { Nome = "Mouse", Preco = 120M },
+        new Produto { Nome = "Teclado", Preco = 250M }
+    };
+
+    private List<Tarefa> tarefas = new()
+    {
+        new Tarefa { Descricao = "Estudar Blazor", Concluida = false },
+        new Tarefa { Descricao = "Fazer compras", Concluida = true },
+        new Tarefa { Descricao = "Enviar relatório", Concluida = false }
+    };
+
+    public class Produto
+    {
+        public string Nome { get; set; } = "";
+        public decimal Preco { get; set; }
+    }
+
+    public class Tarefa
+    {
+        public string Descricao { get; set; } = "";
+        public bool Concluida { get; set; }
+    }
+
+    private void AlternarTarefa(Tarefa tarefa)
+    {
+        tarefa.Concluida = !tarefa.Concluida;
+    }
+}
