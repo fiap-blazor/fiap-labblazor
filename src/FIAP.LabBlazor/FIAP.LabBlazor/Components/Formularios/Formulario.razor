@@ -1,0 +1,125 @@
+﻿@page "/formulario"
+@using System.ComponentModel.DataAnnotations
+
+<h1>Cadastro de Aluno</h1>
+
+<EditForm Model="Aluno" OnValidSubmit="Salvar" FormName="AlunoForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary class="mb-3" />
+
+    <div class="mb-3">
+        <label class="form-label">Nome Completo</label>
+        <InputText class="form-control" @bind-Value="Aluno.Nome" />
+        <ValidationMessage For="@(() => Aluno.Nome)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">E-mail</label>
+        <InputText class="form-control" @bind-Value="Aluno.Email" type="email" />
+        <ValidationMessage For="@(() => Aluno.Email)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Matrícula</label>
+        <InputNumber class="form-control" @bind-Value="Aluno.Matricula" />
+        <ValidationMessage For="@(() => Aluno.Matricula)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Data de Nascimento</label>
+        <InputDate class="form-control" @bind-Value="Aluno.DataNascimento" />
+        <ValidationMessage For="@(() => Aluno.DataNascimento)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Curso</label>
+        <InputSelect class="form-select" @bind-Value="Aluno.Curso">
+            <option value="">Selecione...</option>
+            <option value="Engenharia">Engenharia</option>
+            <option value="Direito">Direito</option>
+            <option value="Administração">Administração</option>
+        </InputSelect>
+        <ValidationMessage For="@(() => Aluno.Curso)" class="text-danger" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Período</label>
+        <InputRadioGroup @bind-Value="Aluno.Periodo">
+            @foreach (var periodo in Periodos)
+            {
+                <div class="form-check form-check-inline">
+                    <InputRadio class="form-check-input" Value="@periodo" /> @periodo
+                </div>
+            }
+        </InputRadioGroup>
+        <ValidationMessage For="@(() => Aluno.Periodo)" class="text-danger" />
+    </div>
+
+    <div class="form-check form-switch mb-3">
+        <InputCheckbox @bind-Value="Aluno.Ativo" class="form-check-input" />
+        <label class="form-check-label">Aluno Ativo</label>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Observações</label>
+        <InputTextArea class="form-control" @bind-Value="Aluno.Observacoes" rows="3" />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Foto do Aluno</label>
+        <InputFile class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Salvar</button>
+</EditForm>
+
+@if (mensagem != null)
+{
+    <div class="alert alert-success mt-3">@mensagem</div>
+}
+
+@code {
+    [SupplyParameterFromForm]
+    private AlunoModel Aluno { get; set; } = new();    
+
+    private List<string> Periodos = new() { "Manhã", "Tarde", "Noite" };
+
+    private string? mensagem;
+
+    private void Salvar()
+    {
+        mensagem = $"Aluno {Aluno.Nome} cadastrado com sucesso!";
+    }
+
+    public class AlunoModel
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required(ErrorMessage = "O nome é obrigatório.")]
+        public string Nome { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "O e-mail é obrigatório.")]
+        [EmailAddress(ErrorMessage = "E-mail inválido.")]
+        public string Email { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "A data de nascimento é obrigatória.")]
+        public DateTime? DataNascimento { get; set; }
+
+        [Required(ErrorMessage = "A matrícula é obrigatória.")]
+        [Range(1001, int.MaxValue, ErrorMessage = "A matrícula deve ser maior que 1000.")]
+        public int Matricula { get; set; }        
+
+        [Required(ErrorMessage = "Selecione o curso.")]
+        public string? Curso { get; set; }
+
+        [Required(ErrorMessage = "Selecione o período.")]
+        public string? Periodo { get; set; }
+
+        public bool Ativo { get; set; }
+
+        public string? Observacoes { get; set; }
+
+        public IBrowserFile? FotoAluno { get; set; }
+    }
+}

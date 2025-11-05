@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Compile Remove="Components\RenderModes\RenderModeStatic.cs" />
+    <Compile Remove="Components\Roteamento\Parametros\RotaRestricao.cs" />
   </ItemGroup>
 
   <ItemGroup>

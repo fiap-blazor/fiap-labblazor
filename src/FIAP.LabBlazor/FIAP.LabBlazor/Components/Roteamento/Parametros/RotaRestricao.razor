@@ -1,0 +1,9 @@
+﻿@page "/pedido/{pedidoId:int}"
+
+<h3>Busca de Pedido</h3>
+<p>Exibindo pedido ID: <b>@pedidoId</b></p>
+
+@code {
+    [Parameter]
+    public int pedidoId { get; set; }
+}

@@ -1,0 +1,17 @@
+﻿@page "/erro-roteamento/{codigo:int}"
+
+<div class="alert alert-danger" role="alert">
+    @MensagemErro
+</div>
+
+@code {
+    [Parameter]
+    public int codigo { get; set; }
+
+    private string MensagemErro => codigo switch
+    {
+        404 => "Página não encontrada (404)",
+        500 => "Erro interno do servidor (500)",
+        _ => "Erro desconhecido"
+    };
+}

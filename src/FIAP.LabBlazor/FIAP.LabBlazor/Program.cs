@@ -24,6 +24,8 @@ else
     app.UseHsts();
 }
 
+app.UseStatusCodePagesWithRedirects("/erro-roteamento/{0}");
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();

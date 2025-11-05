@@ -1,0 +1,10 @@
+﻿@page "/produto/{codigo}"
+
+<h1>Produto Detalhe</h1>
+<p>Código recebido pela rota: <b>@codigo</b></p>
+
+
+@code {
+    [Parameter]
+    public string codigo { get; set; } = string.Empty;
+} 
