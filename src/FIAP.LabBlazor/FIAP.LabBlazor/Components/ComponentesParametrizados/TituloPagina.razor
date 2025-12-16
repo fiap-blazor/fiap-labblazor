@@ -1,0 +1,8 @@
+﻿<PageTitle>@TituloCompleto</PageTitle>
+
+@code {
+    [Parameter, EditorRequired]
+    public string Titulo { get; set; } = string.Empty;
+
+    private string TituloCompleto => $"{Titulo} - LabBlazor"; // Colocar no Pages/Weather
+}
