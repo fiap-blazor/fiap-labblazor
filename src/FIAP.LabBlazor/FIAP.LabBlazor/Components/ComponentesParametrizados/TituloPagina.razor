@@ -2,7 +2,7 @@
 
 @code {
     [Parameter, EditorRequired]
-    public string Titulo { get; set; } = string.Empty;
+    public string Titulo { get; set; }
 
     private string TituloCompleto => $"{Titulo} - LabBlazor"; // Colocar no Pages/Weather
 }
