@@ -29,8 +29,5 @@ else
 @code {
     private bool estaAtivo = false;
 
-    private void AlterarStatus(ChangeEventArgs e)
-    {
-        estaAtivo = (bool)e.Value!;
-    }
+    private void AlterarStatus() => estaAtivo = !estaAtivo;
 }
